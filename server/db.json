@@ -1,0 +1,233 @@
+[
+   {
+      "id":"1",
+      "metadata":{
+         "title":"It's first poll",
+         "description":"",
+         "publishedUrl":"https://docs.google.com/forms/d/e/1FAIpQLScPzx56zhMgV_iTxrm7F6O7-uFhqKYnuP2lda1OeL_ohAQsmw/viewform",
+         "companyId":"",
+         "editorEmails":[
+            "stevenschmatz@gmail.com"
+         ],
+         "count":"13",
+         "confirmationMessage":"Thanks for submitting your contact info!"
+      },
+      "items":[
+         {
+            "type":"TEXT",
+            "helpText":"",
+            "title":"Name",
+            "id":1633920210,
+            "isRequired":false
+         },
+         {
+            "type":"TEXT",
+            "helpText":"",
+            "title":"Email",
+            "id":227649005,
+            "isRequired":true
+         },
+         {
+            "type":"TEXT",
+            "helpText":"",
+            "title":"Address",
+            "id":790080973,
+            "isRequired":true
+         },
+         {
+            "type":"MULTIPLE_CHOICE",
+            "helpText":"",
+            "id":1770822543,
+            "title":"How much do you like choices?",
+            "isRequired":false,
+            "hasOtherOption":true,
+            "choices":[
+               "Option 1",
+               "Option 2"
+            ]
+         },
+         {
+            "type":"CHECKBOX",
+            "helpText":"",
+            "id":1846923513,
+            "title":"How much do you like checkboxes?",
+            "isRequired":false,
+            "hasOtherOption":true,
+            "choices":[
+               "Option 1 Check",
+               "Option 2 Check"
+            ]
+         },
+         {
+            "type":"LIST",
+            "helpText":"",
+            "id":449887830,
+            "title":"How much do you like dropdowns?",
+            "isRequired":false,
+            "choices":[
+               "Option 1 Dropdown",
+               "Option 2 Dropdown",
+               "Option 3 Dropdown"
+            ]
+         },
+         {
+            "type":"SCALE",
+            "helpText":"",
+            "id":1522153189,
+            "upperBound":5,
+            "title":"How much do you like scales?",
+            "rightLabel":"Not fun",
+            "leftLabel":"Fun",
+            "lowerBound":1,
+            "isRequired":false
+         },
+         {
+            "type":"GRID",
+            "helpText":"",
+            "id":271830833,
+            "rows":[
+               "Row 1",
+               "Row 2"
+            ],
+            "columns":[
+               "Column 1",
+               "Column 2"
+            ],
+            "title":"How much do you like grids?",
+            "isRequired":true
+         },
+         {
+            "type":"DATE",
+            "helpText":"",
+            "id":132128974,
+            "title":"When were you born?",
+            "isRequired":true,
+            "includesYear":true
+         },
+         {
+            "type":"TIME",
+            "helpText":"",
+            "title":"What time is it right now?",
+            "id":241877230,
+            "isRequired":false
+         },
+         {
+            "type":"SECTION_HEADER",
+            "helpText":"No questions here.",
+            "title":"This is a title.",
+            "id":1461919302
+         },
+         {
+            "type":"VIDEO",
+            "helpText":"",
+            "id":1219208494,
+            "width":320,
+            "title":"This is a YouTube video.",
+            "alignment":"LEFT"
+         },
+         {
+            "type":"PAGE_BREAK",
+            "helpText":"Please work.",
+            "pageNavigationType":"CONTINUE",
+            "goToPage":null,
+            "id":259261228
+         }
+      ]
+   },
+   {
+      "id":"2",
+      "metadata":{
+         "title":"It's second poll",
+         "description":"",
+         "publishedUrl":"https://docs.google.com/forms/d/e/1FAIpQLScPzx56zhMgV_iTxrm7F6O7-uFhqKYnuP2lda1OeL_ohAQsmw/viewform",
+         "companyId":"",
+         "editorEmails":[
+            "stevenschmatz@gmail.com"
+         ],
+         "count":"6",
+         "confirmationMessage":"Thanks for submitting your contact info!"
+      },
+      "items":[
+         {
+            "type":"TEXT",
+            "helpText":"",
+            "title":"Name",
+            "id":1633920210,
+            "isRequired":false
+         },
+         {
+            "type":"MULTIPLE_CHOICE",
+            "helpText":"",
+            "id":1770822543,
+            "title":"How much do you like choices?",
+            "isRequired":false,
+            "hasOtherOption":true,
+            "choices":[
+               "Option 1",
+               "Option 2"
+            ]
+         },
+         {
+            "type":"LIST",
+            "helpText":"",
+            "id":449887830,
+            "title":"How much do you like dropdowns?",
+            "isRequired":false,
+            "choices":[
+               "Option 1 Dropdown",
+               "Option 2 Dropdown",
+               "Option 3 Dropdown"
+            ]
+         },
+         {
+            "type":"SCALE",
+            "helpText":"",
+            "id":1522153189,
+            "upperBound":5,
+            "title":"How much do you like scales?",
+            "rightLabel":"Not fun",
+            "leftLabel":"Fun",
+            "lowerBound":1,
+            "isRequired":false
+         },
+         {
+            "type":"VIDEO",
+            "helpText":"",
+            "id":1219208494,
+            "width":320,
+            "title":"This is a YouTube video.",
+            "alignment":"LEFT"
+         },
+         {
+            "type":"PAGE_BREAK",
+            "helpText":"Please work.",
+            "pageNavigationType":"CONTINUE",
+            "goToPage":null,
+            "id":259261228
+         }
+      ]
+   },
+   {
+      "id":"3",
+      "metadata":{
+         "title":"It's third poll",
+         "description":"This poll has only one item",
+         "publishedUrl":"https://docs.google.com/forms/d/e/1FAIpQLScPzx56zhMgV_iTxrm7F6O7-uFhqKYnuP2lda1OeL_ohAQsmw/viewform",
+         "companyId":"",
+         "editorEmails":[
+            "stevenschmatz@gmail.com"
+         ],
+         "count":"1",
+         "confirmationMessage":"Thanks for submitting your contact info!"
+      },
+      "items":[
+         {
+            "type":"TEXT",
+            "helpText":"",
+            "title":"Name",
+            "id":1633920210,
+            "isRequired":false
+         }
+      ]
+   }
+]
