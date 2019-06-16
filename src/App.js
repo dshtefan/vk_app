@@ -1,7 +1,9 @@
 import React from 'react';
 import connect from '@vkontakte/vkui-connect';
-import {Cell, Group, List, Panel, PanelHeader, View} from '@vkontakte/vkui';
+import {Cell, Group, List, Panel, PanelHeader, View, HeaderButton, platform, IOS} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
+import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
+import Icon24Back from '@vkontakte/icons/dist/24/back';
 
 import Home from './panels/Home';
 import Persik from './panels/Persik';
@@ -46,21 +48,28 @@ class App extends React.Component {
 	};
 
 	render() {
+		const osname = platform();
 		const queryParams = this.parseQueryString(window.location.search);
 		const hashParams = this.parseQueryString(window.location.hash);
-
+		
 		return (
 			<View activePanel={this.state.activePanel}>
 				<Panel id="main">
-				 	<PanelHeader>Launch params</PanelHeader>
+					<PanelHeader
+						left={<HeaderButton onClick={this.go} data-to="home">
+							{osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
+						</HeaderButton>}
+					>
+						Launch params
+					</PanelHeader>
 					<Group title="Query params">
-               	<List>
-                   	{Object.keys(queryParams).map((key) => {
-                       	let value = queryParams[key];
-                       	return <Cell description={key}>{value ? value : <span style={{color: 'red'}}>-</span>}</Cell>;
-                   	})}
-               	</List>
-              	</Group>
+						<List>
+							{Object.keys(queryParams).map((key) => {
+								let value = queryParams[key];
+								return <Cell description={key}>{value ? value : <span style={{color: 'red'}}>-</span>}</Cell>;
+							})}
+						</List>
+					</Group>
 					<Group title="Hash params">
 						<List>
 							 {Object.keys(hashParams).map((key) => {
