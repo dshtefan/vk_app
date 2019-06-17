@@ -1,34 +1,26 @@
 import React from 'react';
 import connect from '@vkontakte/vkui-connect';
-import {Cell, Group, List, Panel, PanelHeader, View, HeaderButton, platform, IOS} from '@vkontakte/vkui';
+import {Root} from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
-import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
-import Icon24Back from '@vkontakte/icons/dist/24/back';
+
 
 import Home from './panels/Home';
-import Persik from './panels/Persik';
+import Params from './panels/Params';
+import Error from './panels/Error';
+import QuePoll from './panels/QuePoll';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			activePanel: 'home',
+			data: [],
+			activeView: 'home',
 			fetchedUser: null,
+			isLoading: false,
+			pollId: ''
 		};
 	}
-
-	parseQueryString = (string) => {
-		 return string.slice(1).split('&')
-			  .map((queryParam) => {
-				   let kvp = queryParam.split('=');
-				   return {key: kvp[0], value: kvp[1]}
-			  })
-			  .reduce((query, kvp) => {
-				   query[kvp.key] = kvp.value;
-				   return query
-			  }, {})
-	  };
 
 	componentDidMount() {
 		connect.subscribe((e) => {
@@ -41,47 +33,69 @@ class App extends React.Component {
 			}
 		});
 		connect.send('VKWebAppGetUserInfo', {});
+
+		//Обработка входящих параметров
+		const hashParams = this.parseQueryString(window.location.hash);
+		Object.keys(hashParams).map((key) => {
+			 let value = hashParams[key];
+			 if(key === 'poll'){
+				 this.setState({'pollId': value});
+				 this.getPoll(value);
+			 }
+			 return [];
+		});
+	};
+
+	switchView = (id) => {
+		this.setState({ activeView: id })
 	}
 
 	go = (e) => {
-		this.setState({ activePanel: e.currentTarget.dataset.to })
+		this.setState({ activeView: e.currentTarget.dataset.to });
 	};
 
+	//Получение вопросов
+	getPoll= (id) => {
+		try {
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'http://localhost:3012/getpoll?id=' + id, false);
+			xhr.send();
+			if (xhr.status !== 200) {
+			  this.switchView('error');
+			} else {
+			  var res = JSON.parse(xhr.responseText);
+			  if(res.ok === false){
+				  this.switchView('error');
+				  return;
+			  }
+			  this.setState({data: res});
+			}
+		} catch(ex){
+			this.switchView('error');
+		}
+	};
+
+	//Парсим строку параметров
+	parseQueryString = (string) => {
+		 return string.slice(1).split('&')
+			  .map((queryParam) => {
+					let kvp = queryParam.split('=');
+					return {key: kvp[0], value: kvp[1]}
+			  })
+			  .reduce((query, kvp) => {
+					query[kvp.key] = kvp.value;
+					return query
+			  }, {})
+	  };
+
 	render() {
-		const osname = platform();
-		const queryParams = this.parseQueryString(window.location.search);
-		const hashParams = this.parseQueryString(window.location.hash);
-		
 		return (
-			<View activePanel={this.state.activePanel}>
-				<Panel id="main">
-					<PanelHeader
-						left={<HeaderButton onClick={this.go} data-to="home">
-							{osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
-						</HeaderButton>}
-					>
-						Launch params
-					</PanelHeader>
-					<Group title="Query params">
-						<List>
-							{Object.keys(queryParams).map((key) => {
-								let value = queryParams[key];
-								return <Cell description={key}>{value ? value : <span style={{color: 'red'}}>-</span>}</Cell>;
-							})}
-						</List>
-					</Group>
-					<Group title="Hash params">
-						<List>
-							 {Object.keys(hashParams).map((key) => {
-								  let value = hashParams[key];
-								  return <Cell description={key}>{value ? value : <span style={{color: 'red'}}>-</span>}</Cell>;
-							 })}
-						</List>
-					</Group>
-				</Panel>
+			<Root activeView={this.state.activeView}>
+				<Error id="error" go={this.go} />
+				<Params id="main" go={this.go} />
+				<QuePoll id="quepoll" data={this.state.data} sv={this.switchView} />
 				<Home id="home" fetchedUser={this.state.fetchedUser} go={this.go} />
-				<Persik id="persik" go={this.go} />
-			</View>
+			</Root>
 		);
 	}
 }
