@@ -5,7 +5,6 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 
 import Home from './panels/Home';
-import Params from './panels/Params';
 import Error from './panels/Error';
 import QuePoll from './panels/QuePoll';
 
@@ -36,14 +35,19 @@ class App extends React.Component {
 
 		//Обработка входящих параметров
 		const hashParams = this.parseQueryString(window.location.hash);
-		Object.keys(hashParams).map((key) => {
-			 let value = hashParams[key];
-			 if(key === 'poll'){
-				 this.setState({'pollId': value});
-				 this.getPoll(value);
-			 }
-			 return [];
-		});
+		console.log(Object.keys(hashParams));
+		if(Object.keys(hashParams).includes('poll')){
+			Object.keys(hashParams).map((key) => {
+				 let value = hashParams[key];
+				 if(key === 'poll'){
+					 this.setState({'pollId': value});
+					 this.getPoll(value);
+				 }
+				 return [];
+			});
+		} else {
+			this.switchView('error');
+		}
 	};
 
 	switchView = (id) => {
@@ -92,7 +96,6 @@ class App extends React.Component {
 		return (
 			<Root activeView={this.state.activeView}>
 				<Error id="error" go={this.go} />
-				<Params id="main" go={this.go} />
 				<QuePoll id="quepoll" data={this.state.data} sv={this.switchView} />
 				<Home id="home" fetchedUser={this.state.fetchedUser} go={this.go} />
 			</Root>
